@@ -1,5 +1,5 @@
 const { execPath } = require('process');
-const getDirectories = require('../../getDirectories.js');
+const getDirectories = require('./getDirectories.js');
 const path = require('path');
 
 

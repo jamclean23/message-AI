@@ -5,28 +5,23 @@
 // System
 const path = require('path');
 
+// Plugins 
+const FileManagerPlugin = require('filemanager-webpack-plugin');
+
 // Functions
-const getDirs = require('./functions/getDirectories.js');
+const getDirs = require('./functions/getDirectories/getDirectories.js');
+const buildEntriesObj = require('./functions/buildEntriesObj/buildEntriesObj.js');
 
 // ====== GLOBAL VARS ======
 
 const entryFolders = getDirs(path.join(__dirname, '../src'));
-console.log('Building from entry points:');
-entryFolders.forEach((entry) => {
-    console.log(entry);
-});
+const entryObj = buildEntriesObj(entryFolders);
 
 
 // ====== CONFIGURATION ======
 
 module.exports = {
-    entry: {
-        '/diffusion/diffusion': './src/diffusion/diffusion.js',
-        '/diffusionKeyConf/diffusionKeyConf': './src/diffusionKeyConf/diffusionKeyConf.js',
-        '/diffusionTest/diffusionTest': './src/diffusionTest/diffusionTest.js',
-        '/serverInfo/serverInfo': './src/serverInfo/serverInfo.js',
-        '/diffusionApiRequest/diffusionApiRequest': './src/diffusionApiRequest/diffusionApiRequest.js'
-    },
+    entry: entryObj,
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, '../dist'),
@@ -48,5 +43,22 @@ module.exports = {
                 type: 'asset/resource',
             }            
         ]
-    }
+    },
+    plugins: [
+        new FileManagerPlugin({
+            events: {
+              onStart: { 
+                 delete: [
+                  {
+                    source: path.join(__dirname,'../dist/').replaceAll('\\','/'), 
+                     options:{
+                       force: true,
+                       recursive : true,
+                       },
+                   },
+                 ],
+               },
+            },
+         })
+    ]
 }
