@@ -4,7 +4,7 @@
 // ====== FUNCTIONS ======
 
 function testIndexRoute (req, res) {
-    res.send('<h1>TEST ROUTE</h1>');
+    res.render('index');
 }
 
 
