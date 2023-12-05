@@ -1,4 +1,4 @@
-// Route for '/' level requests
+// Route for requests not found
 
 
 // ====== IMPORTS ======
@@ -7,13 +7,11 @@ const express = require('express');
 const router = express.Router();
 
 // Controller
-const indexController = require('../controllers/indexController.js'); 
-
+const controller = require('../controllers/fourOhFourController');
 
 // ====== ROUTES ======
 
-router.get('/', indexController.testIndexRoute);
-
+router.use(controller.fourOhFourPage);
 
 // ====== EXPORTS ======
 

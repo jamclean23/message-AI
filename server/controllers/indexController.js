@@ -11,5 +11,5 @@ function testIndexRoute (req, res) {
 // ====== EXPORTS ======
 
 module.exports = {
-    testIndexRoute
+    testIndexRoute,
 }

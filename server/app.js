@@ -26,7 +26,9 @@ const testLog = require('./middleware/testLog.js');
 
 // Routes
 const indexRoute = require('./routes/indexRoute.js');
-
+const loginRoute = require('./routes/loginRoute.js');
+const registerRoute = require('./routes/registerRoute.js');
+const fourOhFourRoute = require('./routes/fourOhFourRoute.js');
 
 // ====== GLOBAL VARS / INIT ======
 
@@ -48,7 +50,9 @@ app.use(testLog);
 // ====== ROUTES ======
 
 app.use('/', indexRoute);
-
+app.use('/login', loginRoute);
+app.use('/register', registerRoute);
+app.use(fourOhFourRoute);
 
 // ====== EXPORTS ======
 

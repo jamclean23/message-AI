@@ -1,4 +1,4 @@
-// Route for '/' level requests
+// Route for '/login' level requests
 
 
 // ====== IMPORTS ======
@@ -7,12 +7,12 @@ const express = require('express');
 const router = express.Router();
 
 // Controller
-const indexController = require('../controllers/indexController.js'); 
+const controller = require('../controllers/loginController');
 
 
 // ====== ROUTES ======
 
-router.get('/', indexController.testIndexRoute);
+router.get('/', controller.loginPage);
 
 
 // ====== EXPORTS ======
