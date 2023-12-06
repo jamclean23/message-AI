@@ -12,9 +12,17 @@ const controller = require('../controllers/loginController');
 
 // ====== ROUTES ======
 
-router.get('/', controller.loginPage);
 
-
+function init (passport) {
+    router.get('/', controller.loginPage);
+    router.post('/', passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    }));
+    return router;
+}
 // ====== EXPORTS ======
 
-module.exports = router;
+module.exports = {
+    init
+};

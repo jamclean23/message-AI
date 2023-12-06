@@ -13,6 +13,7 @@ const controller = require('../controllers/registerController');
 // ====== ROUTES ======
 
 router.get('/', controller.registerPage);
+router.post('/', controller.processRegister);
 
 
 // ====== EXPORTS ======

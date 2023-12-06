@@ -21,12 +21,17 @@ require('dotenv').config({
 // Mongoose
 const mongoose = require('mongoose');
 
+// Passport
+const passport = require('passport');
+require('./functions/server/initPassport.js').initialize(passport);
+
+
 // Custom Middleware
 const testLog = require('./middleware/testLog.js');
 
 // Routes
 const indexRoute = require('./routes/indexRoute.js');
-const loginRoute = require('./routes/loginRoute.js');
+const loginRoute = require('./routes/loginRoute.js').init(passport);
 const registerRoute = require('./routes/registerRoute.js');
 const fourOhFourRoute = require('./routes/fourOhFourRoute.js');
 
