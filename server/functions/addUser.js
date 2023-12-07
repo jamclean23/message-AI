@@ -7,7 +7,7 @@ const path = require('path');
 
 // Mongoose
 const mongoose = require('mongoose');
-const User = require('../../models/user.js');
+const User = require('../models/user.js');
 
 // Password hashing
 const bcrypt = require('bcryptjs');

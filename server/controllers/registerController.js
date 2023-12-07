@@ -4,7 +4,7 @@
 // ====== IMPORTS ======
 
 // Functions
-const addUser = require('../functions/server/addUser.js');
+const addUser = require('../functions/addUser.js');
 
 
 // ====== FUNCTIONS ======

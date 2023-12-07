@@ -22,7 +22,7 @@ const mongoose = require('mongoose');
 const app = require('./app.js');
 
 // Functions
-const appListenerCb = require('./functions/server/appListenerCb.js');
+const appListenerCb = require('./functions/appListenerCb.js');
 
 
 // ====== GLOBAL VARS ======
