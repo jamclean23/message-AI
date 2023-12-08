@@ -25,12 +25,12 @@ require('dotenv').config({
 
 function initialize (passport) {
     
-    async function authenticateUser (username, password, done) {
+    async function authenticateUser (email, password, done) {
         let user;
 
         try {
             await mongoose.connect(process.env.MONGO_CONNECT_USER_DATA);
-            user = await User.findOne({name: username});
+            user = await User.findOne({"email": email});
 
             if (user == null) {
                 return done(null, false, { message: 'No user with that name.' });
@@ -52,7 +52,7 @@ function initialize (passport) {
     };
 
     passport.use(
-        new LocalStrategy({ usernameField: 'username' }, authenticateUser)
+        new LocalStrategy({ usernameField: 'email' }, authenticateUser)
     );
 
     passport.serializeUser((user, done) => {

@@ -19,6 +19,8 @@ function handleSanitizeErrors (failureRoute) {
         // Parse messages
         const errorMessages = {};
         
+        console.log(errors);
+
         errors.errors.forEach((error) => {
             errorMessages[error.path] = error.msg;
         });

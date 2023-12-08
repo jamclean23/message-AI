@@ -8,8 +8,14 @@ const mongoose = require('mongoose');
 // ====== DEFINITION ======
 
 const userSchema = new mongoose.Schema({
-    name: String,
-    password: String,
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     admin: Boolean
 });
 

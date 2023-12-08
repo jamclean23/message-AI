@@ -5,6 +5,7 @@
 
 // Functions
 const addUser = require('../functions/addUser.js');
+const findUser = require('../functions/findUser.js');
 
 
 // ====== FUNCTIONS ======
@@ -14,10 +15,14 @@ function registerPage (req, res) {
 }
 
 async function processRegister (req, res) {
-    console.log(req.body.username);
-    console.log(req.body.password);
-    await addUser(req.body.username, req.body.password);
-    res.redirect('/login');
+    const existingUser = await findUser(req.body.email, req.body.password);
+
+    if (existingUser) {
+        res.render('register', {errorMessages: { "email": "Username taken" }});
+    } else {
+        await addUser(req.body.email, req.body.password);
+        res.redirect('/login');
+    }
 }
 
 

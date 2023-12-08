@@ -10,8 +10,8 @@ const { check } = require('express-validator');
 // ====== FUNCTIONS ======
 
 const reqKeyValidate = [
-    check('username', 'username not valid').trim().escape(),
-    check('email', 'email not valid').isEmail().trim().escape(),
+    check('email', 'Email not valid').isEmail().trim().escape(),
+    check('password', 'Password must be at least 8 characters').isLength({ min: 8 }),
 ]
 
 
