@@ -6,6 +6,10 @@
 const express = require('express');
 const router = express.Router();
 
+// Middleware
+const sanitizeBody = require('../middleware/login/sanitizeLoginBody.js');
+const handleSanitizeErrors = require('../middleware/handleSanitizeErrors.js');
+
 // Controller
 const controller = require('../controllers/loginController');
 
@@ -15,7 +19,7 @@ const controller = require('../controllers/loginController');
 
 function init (passport) {
     router.get('/', (req, res, next) => {console.log('LOGIN ROUTE'); next()}, controller.loginPage);
-    router.post('/', passport.authenticate('local', {
+    router.post('/', sanitizeBody, handleSanitizeErrors('login'), passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/login'
     }));
