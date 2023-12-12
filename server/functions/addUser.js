@@ -34,7 +34,7 @@ async function addUser  (email, password) {
         });
         
         const newUser = new User({
-            email: email,
+            email: email.toLowerCase(),
             password: bcrypt.hashSync(password, 10),
             admin: false
         });

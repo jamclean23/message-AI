@@ -1,1 +1,1 @@
-{"version":3,"file":"/index/index.css","mappings":"AAAA,KACI,qBACJ","sources":["webpack://message-ai/../index/index.css"],"sourcesContent":["html {\n    background-color: aqua;\n}\n"],"names":[],"sourceRoot":""}
+{"version":3,"file":"/index/index.css","mappings":"AAAA,KACI,qBAAsB,CACtB,iEACJ,CAEA,GACI,UACJ","sources":["webpack://message-ai/../../index/index.css"],"sourcesContent":["html {\n    background-color: aqua;\n    background-image: url(../../index/assets/26853f902118c01eee58.jpg);\n}\n\nh1 {\n    color: white;\n}\n"],"names":[],"sourceRoot":""}

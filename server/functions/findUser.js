@@ -30,7 +30,7 @@ async function findUser  (email) {
             throw new Error("Mongoose Connection Error");
         });
         
-        user = await User.findOne({ "email": email });
+        user = await User.findOne({ "email": email.toLowerCase() });
         
 
     } catch (err) {

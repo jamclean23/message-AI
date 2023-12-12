@@ -30,7 +30,7 @@ function initialize (passport) {
 
         try {
             await mongoose.connect(process.env.MONGO_CONNECT_USER_DATA);
-            user = await User.findOne({"email": email});
+            user = await User.findOne({ "email": email.toLowerCase() });
 
             if (user == null) {
                 return done(null, false, { message: 'No user with that name.' });

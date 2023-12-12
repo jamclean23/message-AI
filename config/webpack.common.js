@@ -25,6 +25,16 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, '../dist'),
+        assetModuleFilename: (pathData) => {
+            const issuer = pathData.module.resourceResolveData.context.issuer;
+            let issuerPath;
+            if (issuer.includes('/')) {
+                issuerPath = issuer.split('/').slice(-2, -1)[0];
+            } else {
+                issuerPath = issuer.split('\\').slice(-2, -1)[0];
+            }
+            return issuerPath + '/assets/[hash][ext]';
+        },
         clean: true
     },
     module: {
