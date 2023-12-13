@@ -8,31 +8,36 @@
     <title>Register</title>
 </head>
 <body>
-    <h1>Register</h1>
-    <form action="/register" method="POST">
-        <div class="fieldWrapper">
-            <label for="email">Email</label>
-            <% if (locals.errorMessages) { %>
-                <% if (errorMessages.email) { %>
-                    <span class="errorMsg">
-                        <%=errorMessages.email%>                    
-                    </span>
+    <header>
+        <h1>Register</h1>
+    </header>
+    <main>
+
+        <form action="/register" method="POST">
+            <div class="fieldWrapper">
+                <label for="email">Email</label>
+                <% if (locals.errorMessages) { %>
+                    <% if (errorMessages.email) { %>
+                        <span class="errorMsg">
+                            <%=errorMessages.email%>                    
+                        </span>
+                    <% } %>
                 <% } %>
-            <% } %>
-            <input id="email" type="email" name="email"/>
-        </div>
-        <div class="fieldWrapper">
-            <label for="password">Password</label>
-            <% if (locals.errorMessages) { %>
-                <% if (errorMessages.password) { %>
-                    <span class="errorMsg">
-                        <%=errorMessages.password%>                    
-                    </span>
+                <input id="email" type="email" name="email"/>
+            </div>
+            <div class="fieldWrapper">
+                <label for="password">Password</label>
+                <% if (locals.errorMessages) { %>
+                    <% if (errorMessages.password) { %>
+                        <span class="errorMsg">
+                            <%=errorMessages.password%>                    
+                        </span>
+                    <% } %>
                 <% } %>
-            <% } %>
-            <input id="password" type="password" name="password"/>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
+                <input id="password" type="password" name="password"/>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </main>
 </body>
 </html>
