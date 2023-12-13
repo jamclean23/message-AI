@@ -9,6 +9,10 @@ import './index.css';
 // ====== FUNCTIONS ======
 
 function main () {
+    if (performance.getEntries()[0].type === "back_forward") {
+        location.reload();
+    }
+
     addEventsListeners();
 }
 
