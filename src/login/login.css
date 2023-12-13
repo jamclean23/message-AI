@@ -39,6 +39,10 @@ form {
     padding-top: 1rem;
     padding-bottom: 1rem;
     border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 .fieldWrapper {
@@ -55,9 +59,25 @@ form {
     padding: .125rem 1rem;
 }
 
-form {
+.registerInfo {
+    background-color: rgba(0, 0, 0, .5);
+    padding-inline: .5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 6px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    justify-content: center;
+    gap: 1ch;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: rgb(181, 250, 219);
+}
+
+a:active {
+    color: purple;
 }

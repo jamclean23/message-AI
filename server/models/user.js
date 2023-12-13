@@ -16,7 +16,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    admin: Boolean
+    rooms: {
+        type: Array,
+        default: []
+    }
 });
 
 const User = new mongoose.model('users', userSchema);

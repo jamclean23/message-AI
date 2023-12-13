@@ -12,7 +12,6 @@
         <h1>Login</h1>
     </header>
     <main>
-
         <form action="/login" method="POST">
             <div class="fieldWrapper">
                 <label for="email">Email</label>
@@ -21,23 +20,26 @@
                         <span class="errorMsg">
                             <%=errorMessages.email%>                    
                         </span>
-                        <% } %>
-                        <% } %>
-                        <input id="email" type="email" name="email"/>
-                    </div>
-                    <div class="fieldWrapper">
-                        <label for="password">Password</label>
-                        <% if (locals.errorMessages) { %>
-                            <% if (errorMessages.password) { %>
-                                <span class="errorMsg">
-                                    <%=errorMessages.password%>                    
-                                </span>
-                                <% } %>
-                                <% } %>
-                                <input id="password" type="password" name="password"/>
-                            </div>
-                            <button type="submit">Submit</button>
-                        </form>
+                    <% } %>
+                <% } %>
+                <input id="email" type="email" name="email"/>
+            </div>
+            <div class="fieldWrapper">
+                <label for="password">Password</label>
+                <% if (locals.errorMessages) { %>
+                    <% if (errorMessages.password) { %>
+                        <span class="errorMsg">
+                            <%=errorMessages.password%>                    
+                        </span>
+                    <% } %>
+                <% } %>
+                <input id="password" type="password" name="password"/>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <section class="registerInfo">
+            <span>Don't have an account?</span><a href="/register">Sign up here.</a>
+        </section>
     </main>
 </body>
 </html>

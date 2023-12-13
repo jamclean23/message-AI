@@ -61,3 +61,26 @@ form {
     align-items: center;
     gap: 1rem;
 }
+
+.loginInfo {
+    background-color: rgba(0, 0, 0, .5);
+    padding-inline: .5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    gap: 1ch;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: rgb(181, 250, 219);
+}
+
+a:active {
+    color: purple;
+}
