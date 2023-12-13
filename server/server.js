@@ -15,9 +15,6 @@ require('dotenv').config({
     path: path.join(__dirname, '../config/.env')
 });
 
-// Mongoose
-const mongoose = require('mongoose');
-
 // App
 const app = require('./app.js');
 

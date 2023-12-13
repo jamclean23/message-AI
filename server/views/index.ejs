@@ -5,12 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="/index/index.js"></script>
     <link rel="stylesheet" href="/index/index.css"/>
-    <title>Express Template</title>
+    <title>AI Messenger - Home</title>
 </head>
 
 <body>
-    <h1>AI Messenger</h1>
-    <nav></nav>
+    <header>
+        <h1>AI Messenger</h1>
+    </header>
+
+    <main>
+        <div class="yourChatsSection">
+            <h2>Your Chats</h2>
+            <section class="yourChats">
+                <%if (!locals.chats || !locals.chats.length) { %>
+                    <article class="chat noActiveMsg">You have no active chats</article>
+                <%} else {%>
+                    <article class="chat noActiveMsg"></article>
+                <%}%>
+            </section>
+        </div>
+        <div class="newChatBtnWrapper">
+            <button class="newChatBtn">Start a chat</button>
+        </div>
+    </main>
 </body>
 
 </html>
