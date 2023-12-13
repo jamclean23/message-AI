@@ -19,7 +19,7 @@ function addChatBtnListener() {
   const newChatBtn = document.querySelector('.newChatBtn');
   newChatBtn.addEventListener('click', chatButtonListener);
   function chatButtonListener() {
-    window.location.href = '/chat?room=blah';
+    window.location.href = '/chat/start_chat';
   }
 }
 

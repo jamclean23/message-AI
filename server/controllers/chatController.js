@@ -1,16 +1,26 @@
 // Controller for chat routes
 
 
+// ====== IMPORTS ======
+
+const addRoom = require('../functions/addRoom.js');
+
+
 // ====== FUNCTIONS ======
 
 function chatPage (req, res) {
-    console.log(req.user._id.toHexString());
     res.render('chat');
+}
+
+async function startChat (req, res) {
+    await addRoom(req.user._id);    
+    res.redirect('/chat');
 }
 
 
 // ====== EXPORTS ======
 
 module.exports = {
-    chatPage
+    chatPage,
+    startChat
 }

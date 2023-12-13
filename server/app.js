@@ -61,7 +61,7 @@ app.use(passport.session());
 
 // ====== ROUTES ======
 
-app.use('/login', loginRoute);
+app.use('/login', checkNotAuth, loginRoute);
 app.use('/register', checkNotAuth, registerRoute);
 app.use('/logout', checkAuth, logoutRoute);
 app.use('/chat', checkAuth, chatRoute);

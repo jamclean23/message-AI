@@ -12,6 +12,7 @@ const controller = require('../controllers/chatController.js');
 
 // ====== ROUTES ======
 
+router.get('/start_chat', controller.startChat);
 router.get('/', controller.chatPage);
 
 

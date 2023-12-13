@@ -1,10 +1,16 @@
 // Controller for requests to the index route
 
 
+// ====== IMPORTS ======
+
+const getUserRooms = require('../functions/getUserRooms');
+
+
 // ====== FUNCTIONS ======
 
-function testIndexRoute (req, res) {
-    res.render('index');
+async function testIndexRoute (req, res) {
+    const userRooms = await getUserRooms(req.user._id);
+    res.render('index', { rooms: userRooms });
 }
 
 
