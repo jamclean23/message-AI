@@ -16,12 +16,22 @@ function main() {
   addEventsListeners();
 }
 function addEventsListeners() {
-  addChatBtnListener();
+  addNewChatBtnListener();
+  addChatLinkListeners();
 }
-function addChatBtnListener() {
+function addChatLinkListeners() {
+  const chatLinks = document.querySelectorAll('.chat.active');
+  chatLinks.forEach(chatLink => {
+    chatLink.addEventListener('click', chatLinkClickHandler);
+  });
+}
+function chatLinkClickHandler(event) {
+  window.location.href = `/chat/${event.target.getAttribute('data-room-id')}`;
+}
+function addNewChatBtnListener() {
   const newChatBtn = document.querySelector('.newChatBtn');
-  newChatBtn.addEventListener('click', chatButtonListener);
-  function chatButtonListener() {
+  newChatBtn.addEventListener('click', newChatButtonListener);
+  function newChatButtonListener() {
     window.location.href = '/chat/start_chat';
   }
 }

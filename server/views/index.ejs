@@ -10,7 +10,7 @@
 
 <body>
     <header>
-        <h1>AI Messenger</h1>
+        <h1>Messenger AI</h1>
     </header>
 
     <main>
@@ -19,7 +19,7 @@
             <section class="yourChats">
                 <%if (locals.rooms && locals.rooms.length) {%>
                     <%locals.rooms.forEach((room) => {%>
-                        <article class="chat"><%=room.name%><span></span></article>
+                        <article class="chat active" data-room-id='<%=room.id%>'><%=room.name%><span></span></article>
                     <%})%>
                 <%}%>
                 <%if (!locals.rooms || !locals.rooms.length) { %>

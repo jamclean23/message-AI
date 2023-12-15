@@ -35,14 +35,11 @@ function initialize (passport) {
             if (user == null) {
                 return done(null, false, { message: 'No user with that name.' });
             } else {
-                console.log('User found.');
             }
 
             if (await bcrypt.compare(password, user.password)) {
-                console.log('Password correct.');
                 return done(null, user);
             } else {
-                console.log('Password incorrect');
                 return done(null, false, { message: 'Incorrect password' });
             }
         } catch (err) {

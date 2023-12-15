@@ -46,6 +46,10 @@ h2 {
     font-size: 1.2rem;
 }
 
+.yourChats *:first-child {
+    border-top: 1px solid rgba(255, 255, 255, .3);
+}
+
 .yourChats {
     background-color: rgba(0, 0, 0, .7);
     padding-inline: .5rem;
@@ -76,6 +80,7 @@ h2 {
 }
 
 .noActiveMsg {
+    padding: 0;
     border-bottom: 1px solid rgba(255, 255, 255, .3);
     text-align: center;
 }
