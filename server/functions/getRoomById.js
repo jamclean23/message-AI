@@ -12,8 +12,6 @@ async function getRoomById (id) {
     if (id) {
         try {
             const room = await Room.findById(id)
-            console.log('ROOM: ');
-            console.log(room);
             return room;
         } catch (err) {
             console.log(err);

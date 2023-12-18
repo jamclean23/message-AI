@@ -16,8 +16,7 @@ router.get('/start_chat', controller.startChat);
 router.get('/room_obj/:roomId', controller.getRoomObj);
 router.get('/:roomId', controller.chatPage);
 
-router.post('/new_message/:roomId', controller.addMessage);
-
+// router.post('/new_message/:roomId', controller.addMessage);
 
 // ====== EXPORTS ======
 

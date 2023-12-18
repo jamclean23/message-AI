@@ -60,3 +60,22 @@ textarea {
     display: flex;
     justify-content: center;
 }
+
+.messageContainer {
+    background-color: white;
+    opacity: .7;
+    border-radius: 6px;
+    padding: 1rem;
+    color: black;
+}
+
+.messageContainer .sender {
+    font-size: .7rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.messageContainer p {
+    margin: 0;
+    margin-top: 1rem;
+}

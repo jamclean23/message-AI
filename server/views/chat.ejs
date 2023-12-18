@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta class="roomId" data-room-id="<%- locals.roomId %>">
+    <meta class="userId" data-user-id="<%- locals.userId %>">
     <title>Messenger AI - Chat</title>
 </head>
 <body>
@@ -13,13 +14,17 @@
         <h1>Messenger AI</h1>
     </header>
     <main>
+        
+        <section class="messages">
+        </section>
+
         <form class="newMessageForm">
             <div class="textAreaWrapper">
                 <label for="msg">Message</label>
                 <textarea id="msg" name="msg" type="text"></textarea>
             </div>
             <div class="btnWrapper">
-                <button type="button">Send</button>
+                <button class="sendBtn" type="button">Send</button>
             </div>
         </form>
     </main>

@@ -6,10 +6,11 @@
 const addRoom = require('../functions/addRoom.js');
 const getRoomById = require('../functions/getRoomById.js');
 
+
 // ====== FUNCTIONS ======
 
 async function chatPage (req, res) {
-    res.render('chat', {roomId: req.params.roomId});
+    res.render('chat', {roomId: req.params.roomId, userId: req.user.id});
 }
 
 async function startChat (req, res) {

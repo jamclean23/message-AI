@@ -5,10 +5,10 @@
 
 // System
 const path = require('path');
-const fs = require('fs');
 
-// Express
-const express = require('express');
+// Sockets
+const socketIO = require('socket.io');
+const socketInit = require('./functions/socketInit.js');
 
 // Dotenv
 require('dotenv').config({
@@ -26,8 +26,13 @@ const appListenerCb = require('./functions/appListenerCb.js');
 
 const PORT = 5555;
 
+
 // ====== MAIN ======
 
+// REST Server
 const server = app.listen(PORT, (err) => {
     appListenerCb(err, server.address().port);
 });
+
+// Socket.io Server
+socketInit(socketIO(server));
