@@ -20,7 +20,8 @@ function init (socket) {
         console.log('ADDING MESSAGE TO ROOM: ' + messageObj.roomId);
     
         try {
-            await addMessage(messageObj.roomId, messageObj.userId, messageObj.msg);
+            await addMessage(messageObj.roomId, messageObj.userId, messageObj.content, messageObj.username);
+            messageObj.date = new Date(Date.now());
             io.in(messageObj.roomId).emit('to-client-message', messageObj);
         } catch (err) {
             console.log(err);

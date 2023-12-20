@@ -10,7 +10,7 @@ const getRoomById = require('../functions/getRoomById.js');
 // ====== FUNCTIONS ======
 
 async function chatPage (req, res) {
-    res.render('chat', {roomId: req.params.roomId, userId: req.user.id});
+    res.render('chat', {roomId: req.params.roomId, userId: req.user.id, username: req.user.username});
 }
 
 async function startChat (req, res) {
@@ -34,12 +34,14 @@ async function getRoomObj (req, res) {
     }
 }
 
+// NOT USED IN CURRENT IMPLEMENTATION, SEE SOCKET CONTROLLER
 async function addMessage (req, res) {
     console.log('***\nAdd Message');
 
     const roomId = req.params.roomId;
     const message = req.body.msg;
     const userId = req.user.id;
+    const username = req.user.username;
     
     let room;
     if (roomId && message && userId) {
@@ -54,7 +56,8 @@ async function addMessage (req, res) {
 
         room.messages.push({
             user: userId,
-            content: message
+            content: message,
+            username: username
         });
 
         try {

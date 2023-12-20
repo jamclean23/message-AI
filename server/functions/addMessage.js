@@ -12,9 +12,11 @@ const getRoomById = require('./getRoomById.js');
  * 
  * @param {string} roomId - Id of room db entry
  * @param {string} userId - Id of user db entry
+ * @param {string} username - Username in db entry
  * @param {string} msg - Message to be added
  */
-async function addMessage (roomId, userId, msg ) {
+async function addMessage (roomId, userId, msg, username) {
+    console.log('USERNAME: ' + username);
     if (!roomId || (typeof roomId != 'string')) {
         throw new Error('roomId not valid. roomId: ' + roomId);
     } else if (!userId || (typeof userId != 'string')) {
@@ -33,7 +35,8 @@ async function addMessage (roomId, userId, msg ) {
     if (room) {
         room.messages.push({
             user: userId,
-            content: msg
+            content: msg,
+            username
         });
         try {
             room.save();

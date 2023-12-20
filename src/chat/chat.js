@@ -12,6 +12,7 @@ import { io } from 'socket.io-client';
 const socket = io();
 const roomObj = await getRoomObject();
 const userId = getUser();
+const username = getUsername();
 
 
 // ====== FUNCTIONS ======
@@ -37,12 +38,17 @@ async function addMessage (messageObj) {
     // User
     const messageSender = document.createElement('h3');
     messageSender.classList.add('sender');
-    messageSender.innerText = messageObj.user;
+    messageSender.innerText = messageObj.username;
     
     // Content
     const messageContent = document.createElement('p');
     messageContent.classList.add('message');
     messageContent.innerText = messageObj.content;
+
+    // Date
+    const dateContent = document.createElement('p');
+    dateContent.classList.add('date');
+    dateContent.innerText = new Date(messageObj.date);
     
 
     // Assemble message article
@@ -50,7 +56,8 @@ async function addMessage (messageObj) {
     messageArticle.classList.add('messageContainer');
     messageArticle.appendChild(messageSender);
     messageArticle.appendChild(messageContent);
-    
+    messageArticle.appendChild(dateContent);
+
     // Add to dom
     const messagesContainer = document.querySelector('.messages');
     messagesContainer.appendChild(messageArticle);
@@ -84,6 +91,10 @@ function getUser () {
     return document.querySelector('.userId').getAttribute('data-user-id');
 }
 
+function getUsername () {
+    return document.querySelector('.username').getAttribute('data-user-id');
+}
+
 async function getRoomObject () {
     const roomId = document.querySelector('.roomId').getAttribute('data-room-id');
     const response = await fetch(`/chat/room_obj/${roomId}`);
@@ -106,7 +117,8 @@ async function sendBtnListener () {
     socket.emit('message-from-client', {
         userId,
         roomId: roomObj._id,
-        msg: msg
+        content: msg,
+        username
     });
 }
 
