@@ -42,6 +42,8 @@ async function addRoom  (creatorId) {
         user.rooms.push(newRoom._id);
 
         await user.save();
+
+        return newRoom.id;
     } catch (err) {
         console.log(err);
     }

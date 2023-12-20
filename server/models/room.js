@@ -8,7 +8,13 @@ const mongoose = require('mongoose');
 // ====== DEFINITION ======
 
 const messageSchema = new mongoose.Schema({
-    user: { type: mongoose.Schema.ObjectId, ref: "users" },
+    userId: { 
+        type: mongoose.Schema.ObjectId, ref: "users"
+    },
+    username: { 
+        type: String,
+        required: true
+    },
     content: {
         type: String,
         required: true
@@ -28,7 +34,7 @@ const roomSchema = new mongoose.Schema({
     messages: [messageSchema],
     name: {
         type: String,
-        default: 'New Chat ' + Date.now(),
+        default: 'New Chat ' + new Date(Date.now()),
     }
 });
 

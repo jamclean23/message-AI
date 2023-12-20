@@ -14,8 +14,8 @@ async function chatPage (req, res) {
 }
 
 async function startChat (req, res) {
-    await addRoom(req.user._id);    
-    res.redirect('/chat');
+    const newRoomId = await addRoom(req.user._id);    
+    res.redirect(`/chat/${newRoomId}`);
 }
 
 async function getRoomObj (req, res) {

@@ -26,6 +26,17 @@
                 <input id="email" type="email" name="email"/>
             </div>
             <div class="fieldWrapper">
+                <label for="username">Username</label>
+                <% if (locals.errorMessages) { %>
+                    <% if (errorMessages.username) { %>
+                        <span class="errorMsg">
+                            <%=errorMessages.username%>                    
+                        </span>
+                    <% } %>
+                <% } %>
+                <input id="username" type="text" name="username"/>
+            </div>
+            <div class="fieldWrapper">
                 <label for="password">Password</label>
                 <% if (locals.errorMessages) { %>
                     <% if (errorMessages.password) { %>

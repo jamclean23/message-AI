@@ -1,4 +1,4 @@
-// Add a users document to the database
+// Find a users document in the database
 
 // ====== IMPORTS ======
 
@@ -9,9 +9,6 @@ const path = require('path');
 const mongoose = require('mongoose');
 const User = require('../models/user.js');
 
-// Password hashing
-const bcrypt = require('bcryptjs');
-
 // Dotenv
 require('dotenv').config({
     path: path.join(__dirname, '../../../config/.env')
@@ -21,34 +18,33 @@ require('dotenv').config({
 // ====== FUNCTIONS ======
 /**
  * 
- * @param {String} email - Email
- * @param {String} password - Password
- * @param {String} username - Username
+ * @param {String} username - Username db entry
  */
-async function addUser  (email, password, username) {
+async function findUserByName  (username) {
+    let user = {};
+
     try {
-        console.log(`Adding user: ${email}, ${password}, ${username}`);
         await mongoose.connect(process.env.MONGO_CONNECT_USER_DATA);
         const db = mongoose.connection;
         db.on('error', () => {
             throw new Error("Mongoose Connection Error");
         });
         
-        const newUser = new User({
-            email: email.toLowerCase(),
-            username: username.toLowerCase(),
-            password: bcrypt.hashSync(password, 10),
-            admin: false
-        });
-
-        await newUser.save();
+        user = await User.findOne({ "username": username.toLowerCase() });
+        
 
     } catch (err) {
         console.log(err);
+    }
+
+    if (user) {
+        return user;
+    } else {
+        return null;
     }
 }
 
 
 // ====== EXPORTS ======
 
-module.exports = addUser;
+module.exports = findUserByName;
