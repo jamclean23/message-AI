@@ -5,6 +5,7 @@
 
 const addRoom = require('../functions/addRoom.js');
 const getRoomById = require('../functions/getRoomById.js');
+const addInviteToUserByName = require('../functions/addInviteToUserByName.js');
 
 
 // ====== FUNCTIONS ======
@@ -30,6 +31,23 @@ async function getRoomObj (req, res) {
     } catch (err) {
         res.json({
             msg: 'Room not found with provided id'
+        });
+    }
+}
+
+async function sendInvite (req, res) {
+    const recipient = req.params.recipient;
+    const roomId = req.body.roomId;
+
+    const result = await addInviteToUserByName(req.user.username, recipient, roomId);
+
+    if (result) {
+        res.json({
+            msg: 'Success'
+        });
+    } else {
+        res.json({
+            msg: 'Failed'
         });
     }
 }
@@ -99,5 +117,6 @@ module.exports = {
     chatPage,
     startChat,
     getRoomObj,
-    addMessage
+    addMessage,
+    sendInvite
 }

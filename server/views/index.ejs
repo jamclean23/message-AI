@@ -14,18 +14,30 @@
     </header>
 
     <main>
-        <div class="yourChatsSection">
+        <% if (locals.invites && locals.invites.length) { %>
+            <div class="yourInvitesWrapper">
+                <h2>Your Invites</h2>
+                <section class="yourInvites linksContainer">
+                        <% locals.invites.forEach((invite) => { %>
+                            <article class="invite link active" data-room-id="<%=invite.roomId%>"><%=invite.sender%> has invited you to "<%=invite.chatName%>"<span></span></article>
+                        <% }); %>
+                        <article class="invite link noActiveMsg"></article>
+                </section>
+            </div>
+        <% } %>
+
+        <div class="yourChatsWrapper">
             <h2>Your Chats</h2>
-            <section class="yourChats">
+            <section class="yourChats linksContainer">
                 <%if (locals.rooms && locals.rooms.length) {%>
                     <%locals.rooms.forEach((room) => {%>
-                        <article class="chat active" data-room-id='<%=room.id%>'><%=room.name%><span></span></article>
+                        <article class="chat link active" data-room-id='<%=room.id%>'><%=room.name%><span></span></article>
                     <%})%>
                 <%}%>
                 <%if (!locals.rooms || !locals.rooms.length) { %>
-                    <article class="chat noActiveMsg">You have no active chats</article>
+                    <article class="chat link noActiveMsg">You have no active chats</article>
                 <%} else {%>
-                    <article class="chat noActiveMsg"></article>
+                    <article class="chat link noActiveMsg"></article>
                 <%}%>
             </section>
         </div>

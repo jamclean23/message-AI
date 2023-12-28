@@ -19,6 +19,18 @@ function main () {
 function addEventsListeners () {
     addNewChatBtnListener();
     addChatLinkListeners();
+    addInviteLinkListeners();
+}
+
+function addInviteLinkListeners () {
+        const inviteLinks = document.querySelectorAll('.invite.active');
+        inviteLinks.forEach((inviteLink) => {
+            inviteLink.addEventListener('click', inviteLinkClickHandler);
+        });
+}
+
+function inviteLinkClickHandler (event) {
+    window.location.href = `/chat/join_chat/${event.target.getAttribute('data-room-id')}`;
 }
 
 function addChatLinkListeners () {

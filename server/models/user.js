@@ -4,6 +4,7 @@
 
 const mongoose = require('mongoose');
 
+const inviteSchema = require('./schema/invite.js');
 
 // ====== DEFINITION ======
 
@@ -22,7 +23,11 @@ const userSchema = new mongoose.Schema({
     },
     rooms: [{
         type: mongoose.Schema.ObjectId, ref: "rooms"
-    }]
+    }],
+    invites: [
+        inviteSchema
+    ]
+
 });
 
 const User = new mongoose.model('users', userSchema);

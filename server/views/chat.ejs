@@ -15,10 +15,14 @@
         <h1>Messenger AI</h1>
     </header>
     <main>
+        <section class="btnsWrapper">
+            <button class="inviteBtn">Invite to Chat</button>
+        </section>
+
         
         <section class="messages">
         </section>
-
+        
         <form class="newMessageForm">
             <div class="textAreaWrapper">
                 <label for="msg">Message</label>
@@ -29,5 +33,21 @@
             </div>
         </form>
     </main>
+    <div class="inviteModal modal" style="display: none;">
+        <form>
+            <div class="closeBtnWrapper">
+                <button type="button" class="closeBtn">X</button>
+            </div>
+
+            <div class="inputWrapper">
+                <label for="friendName">Friend's Username</label>
+                <input id="friendName" type="text"/>
+            </div>
+
+            <div class="btnWrapper">
+                <button class="formInviteBtn" type="button">Invite</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

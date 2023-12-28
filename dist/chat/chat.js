@@ -180,6 +180,55 @@ async function getRoomObject() {
 }
 function addEventListeners() {
   addSendBtnListener();
+  addInviteBtnListener();
+  addInviteCloseBtnListener();
+  addSubmitInviteBtnListener();
+}
+function addSubmitInviteBtnListener() {
+  const submitInviteBtn = document.querySelector('.inviteModal .formInviteBtn');
+  submitInviteBtn.addEventListener('click', submitInviteBtnListener);
+}
+async function submitInviteBtnListener(event) {
+  hideInviteModal();
+  const friendName = document.querySelector('#friendName').value;
+  const roomId = document.querySelector('.roomId').getAttribute('data-room-id');
+  try {
+    const response = await fetch(`/chat/send_invite/${friendName}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        roomId
+      })
+    });
+    const result = await response.json();
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+}
+function addInviteCloseBtnListener() {
+  const inviteCloseBtn = document.querySelector('.inviteModal .closeBtn');
+  inviteCloseBtn.addEventListener('click', inviteCloseBtnListener);
+}
+function inviteCloseBtnListener() {
+  hideInviteModal();
+}
+function addInviteBtnListener() {
+  const inviteBtn = document.querySelector('.inviteBtn');
+  inviteBtn.addEventListener('click', inviteBtnListener);
+}
+function inviteBtnListener() {
+  showInviteModal();
+}
+function showInviteModal() {
+  const inviteModal = document.querySelector('.inviteModal');
+  inviteModal.style.display = 'flex';
+}
+function hideInviteModal() {
+  const inviteModal = document.querySelector('.inviteModal');
+  inviteModal.style.display = 'none';
 }
 function addSendBtnListener() {
   const sendBtn = document.querySelector('.sendBtn');
