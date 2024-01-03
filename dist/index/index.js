@@ -18,16 +18,53 @@ function main() {
 function addEventsListeners() {
   addNewChatBtnListener();
   addChatLinkListeners();
-  addInviteLinkListeners();
+  addInviteBtnListeners();
 }
-function addInviteLinkListeners() {
-  const inviteLinks = document.querySelectorAll('.invite.active');
-  inviteLinks.forEach(inviteLink => {
-    inviteLink.addEventListener('click', inviteLinkClickHandler);
+function addInviteBtnListeners() {
+  const acceptBtn = document.querySelector('.acceptInviteBtn');
+  if (acceptBtn) {
+    acceptBtn.addEventListener('click', acceptBtnListener);
+  }
+  const ignoreBtn = document.querySelector('.ignoreInviteBtn');
+  if (ignoreBtn) {
+    ignoreBtn.addEventListener('click', ignoreBtnListener);
+  }
+}
+function acceptBtnListener() {}
+async function ignoreBtnListener(event) {
+  const roomId = event.target.parentElement.parentElement.getAttribute('data-room-id');
+  const response = await fetch(`/ignore_invite/${roomId}`, {
+    method: 'DELETE'
   });
+  const result = await response.json();
+  if (result.success) {
+    // Find the dom article and start removal animation
+    const inviteArticle = findArticleByRoomId(roomId);
+    startRemoveArticleAnimation(inviteArticle);
+  }
 }
-function inviteLinkClickHandler(event) {
-  window.location.href = `/chat/join_chat/${event.target.getAttribute('data-room-id')}`;
+function startRemoveArticleAnimation(article) {
+  article.addEventListener('animationend', removeArticleEndHandler);
+  article.classList.add('removing');
+}
+function removeArticleEndHandler(event) {
+  if (event.animationName === 'removing') {
+    event.target.remove();
+  }
+}
+function findArticleByRoomId(roomId) {
+  const inviteArticles = document.querySelectorAll('.invite.link');
+  let result = null;
+  if (inviteArticles) {
+    inviteArticles.forEach(inviteArticle => {
+      if (inviteArticle.getAttribute('data-room-id') === roomId) {
+        result = inviteArticle;
+      }
+    });
+    return result;
+  } else {
+    return null;
+  }
 }
 function addChatLinkListeners() {
   const chatLinks = document.querySelectorAll('.chat.active');

@@ -7,12 +7,14 @@ const express = require('express');
 const router = express.Router();
 
 // Controller
-const indexController = require('../controllers/indexController.js'); 
+const controller = require('../controllers/indexController.js'); 
 
 
 // ====== ROUTES ======
 
-router.get('/', indexController.testIndexRoute);
+router.get('/', controller.testIndexRoute);
+
+router.delete('/ignore_invite/:roomId', controller.ignoreInvite);
 
 
 // ====== EXPORTS ======

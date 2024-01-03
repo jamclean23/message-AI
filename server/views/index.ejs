@@ -19,7 +19,13 @@
                 <h2>Your Invites</h2>
                 <section class="yourInvites linksContainer">
                         <% locals.invites.forEach((invite) => { %>
-                            <article class="invite link active" data-room-id="<%=invite.roomId%>"><%=invite.sender%> has invited you to "<%=invite.chatName%>"<span></span></article>
+                            <article class="invite link" data-room-id="<%=invite.roomId%>">
+                                <%=invite.sender%> has invited you to "<%=invite.chatName%>"
+                                <div class="inviteBtnsWrapper">
+                                    <button class="acceptInviteBtn">Accept</button>
+                                    <button class="ignoreInviteBtn">Ignore</button>
+                                </div>
+                            </article>
                         <% }); %>
                         <article class="invite link noActiveMsg"></article>
                 </section>
