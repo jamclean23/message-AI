@@ -14,6 +14,8 @@ const controller = require('../controllers/indexController.js');
 
 router.get('/', controller.testIndexRoute);
 
+router.post('/accept_invite/:roomId', controller.acceptInvite);
+
 router.delete('/ignore_invite/:roomId', controller.ignoreInvite);
 
 

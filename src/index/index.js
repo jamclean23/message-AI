@@ -34,8 +34,17 @@ function addInviteBtnListeners () {
     }
 }
 
-function acceptBtnListener () {
+async function acceptBtnListener (event) {
+    const roomId = event.target.parentElement.parentElement.getAttribute('data-room-id');
+    const response = await fetch(`/accept_invite/${roomId}`, {
+        method: 'POST'
+    });
+    const result = await response.json();
 
+    if (result.success) {
+        ignoreBtnListener(event);
+        window.location.reload();
+    }
 }
 
 async function ignoreBtnListener (event) {
