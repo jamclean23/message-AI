@@ -23,6 +23,7 @@ function init (socket) {
             await addMessage(messageObj.roomId, messageObj.userId, messageObj.content, messageObj.username);
             messageObj.date = new Date(Date.now());
             io.in(messageObj.roomId).emit('to-client-message', messageObj);
+            socket.emit('message-posted', true);
         } catch (err) {
             console.log(err);
             socket.emit('error', err.message);

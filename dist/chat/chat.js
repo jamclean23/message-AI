@@ -117,7 +117,13 @@ function setupSockets() {
   socket.on('to-client-message', addMessage);
   socket.on('error', handleSocketError);
   socket.on('dev-message', handleDevMessage);
+  socket.on('message-posted', handleMessagePosted);
   socket.emit('join', roomObj._id);
+}
+function handleMessagePosted(status) {
+  console.log('Status: ' + status);
+  const msgTextArea = document.querySelector('#msg');
+  msgTextArea.value = '';
 }
 async function addMessage(messageObj) {
   console.log(messageObj);
@@ -179,11 +185,17 @@ async function getRoomObject() {
   return await response.json();
 }
 function addEventListeners() {
-  addSendBtnListener();
+  addSendChatBtnListener();
+  addSendGPTBtnListener();
   addInviteBtnListener();
   addInviteCloseBtnListener();
   addSubmitInviteBtnListener();
 }
+function addSendGPTBtnListener() {
+  const sendGPTBtn = document.querySelector('.sendGPTBtn');
+  sendGPTBtn.addEventListener('click', sendGPTBtnListener);
+}
+function sendGPTBtnListener(event) {}
 function addSubmitInviteBtnListener() {
   const submitInviteBtn = document.querySelector('.inviteModal .formInviteBtn');
   submitInviteBtn.addEventListener('click', submitInviteBtnListener);
@@ -230,11 +242,11 @@ function hideInviteModal() {
   const inviteModal = document.querySelector('.inviteModal');
   inviteModal.style.display = 'none';
 }
-function addSendBtnListener() {
-  const sendBtn = document.querySelector('.sendBtn');
-  sendBtn.addEventListener('click', sendBtnListener);
+function addSendChatBtnListener() {
+  const sendChatBtn = document.querySelector('.sendChatBtn');
+  sendChatBtn.addEventListener('click', sendChatBtnListener);
 }
-async function sendBtnListener() {
+async function sendChatBtnListener() {
   const msgTextArea = document.querySelector('#msg');
   const msg = msgTextArea.value;
   socket.emit('message-from-client', {
