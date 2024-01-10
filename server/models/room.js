@@ -22,6 +22,14 @@ const messageSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now()
+    },
+    isGpt: {
+        type: Boolean,
+        default: false
+    },
+    prompt: {
+        type: String,
+        default: ''
     }
 });
 

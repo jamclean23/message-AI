@@ -59,6 +59,14 @@ const messageSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now()
+  },
+  isGpt: {
+    type: Boolean,
+    default: false
+  },
+  prompt: {
+    type: String,
+    default: ''
   }
 });
 const roomSchema = new mongoose.Schema({
@@ -121,17 +129,25 @@ function setupSockets() {
   socket.emit('join', roomObj._id);
 }
 function handleMessagePosted(status) {
-  console.log('Status: ' + status);
   const msgTextArea = document.querySelector('#msg');
   msgTextArea.value = '';
 }
 async function addMessage(messageObj) {
+  console.log('Adding message:');
   console.log(messageObj);
 
   // User
   const messageSender = document.createElement('h3');
   messageSender.classList.add('sender');
   messageSender.innerText = messageObj.username;
+
+  // Prompt for Gpt response
+  const gptPrompt = document.createElement('p');
+  gptPrompt.classList.add('prompt');
+  if (messageObj.prompt) {
+    console.log('PROMPT FOUND');
+    gptPrompt.innerText = messageObj.prompt;
+  }
 
   // Content
   const messageContent = document.createElement('p');
@@ -145,8 +161,12 @@ async function addMessage(messageObj) {
 
   // Assemble message article
   const messageArticle = document.createElement('article');
+  if (messageObj.isGpt) {
+    messageArticle.classList.add('gptMessage');
+  }
   messageArticle.classList.add('messageContainer');
   messageArticle.appendChild(messageSender);
+  messageArticle.appendChild(gptPrompt);
   messageArticle.appendChild(messageContent);
   messageArticle.appendChild(dateContent);
 
@@ -155,9 +175,11 @@ async function addMessage(messageObj) {
   messagesContainer.appendChild(messageArticle);
 }
 function handleDevMessage(messageObj) {
+  console.log('SERVER DEV MESSAGE:');
   console.log(messageObj);
 }
 function handleSocketError(err) {
+  console.log('SOCKET ERROR:');
   console.log(err);
 }
 async function populateMessages() {
@@ -195,7 +217,16 @@ function addSendGPTBtnListener() {
   const sendGPTBtn = document.querySelector('.sendGPTBtn');
   sendGPTBtn.addEventListener('click', sendGPTBtnListener);
 }
-function sendGPTBtnListener(event) {}
+function sendGPTBtnListener(event) {
+  const msgTextArea = document.querySelector('#msg');
+  const msg = msgTextArea.value;
+  socket.emit('gpt-message-from-client', {
+    userId,
+    roomId: roomObj._id,
+    content: msg,
+    username
+  });
+}
 function addSubmitInviteBtnListener() {
   const submitInviteBtn = document.querySelector('.inviteModal .formInviteBtn');
   submitInviteBtn.addEventListener('click', submitInviteBtnListener);
@@ -205,7 +236,7 @@ async function submitInviteBtnListener(event) {
   const friendName = document.querySelector('#friendName').value;
   const roomId = document.querySelector('.roomId').getAttribute('data-room-id');
   try {
-    const response = await fetch(`/chat/send_invite/${friendName}`, {
+    await fetch(`/chat/send_invite/${friendName}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -214,8 +245,6 @@ async function submitInviteBtnListener(event) {
         roomId
       })
     });
-    const result = await response.json();
-    console.log(result);
   } catch (err) {
     console.log(err);
   }

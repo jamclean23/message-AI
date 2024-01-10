@@ -2,6 +2,7 @@ Feedback for register/login errors
 Logout button
 Leave chat button
 Invites popup in real time
-GPT chatbox clears after submitting
 message chatbox enter submits, shift+enter new line
 messages do not overflow screen
+Send gpt to api
+User can remove own messages

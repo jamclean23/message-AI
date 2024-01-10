@@ -14,8 +14,10 @@ const getRoomById = require('./getRoomById.js');
  * @param {string} userId - Id of user db entry
  * @param {string} username - Username in db entry
  * @param {string} msg - Message to be added
+ * @param {boolean} isGpt - If message is from chat gpt
+ * @param {string} prompt - Prompt for gpt question
  */
-async function addMessage (roomId, userId, msg, username) {
+async function addMessage (roomId, userId, msg, username, isGpt = false, prompt='') {
     console.log('USERNAME: ' + username);
     if (!roomId || (typeof roomId != 'string')) {
         throw new Error('roomId not valid. roomId: ' + roomId);
@@ -36,7 +38,9 @@ async function addMessage (roomId, userId, msg, username) {
         room.messages.push({
             user: userId,
             content: msg,
-            username
+            username,
+            isGpt,
+            prompt
         });
         try {
             room.save();
