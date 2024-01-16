@@ -3,6 +3,7 @@
 
 // ====== IMPORTS ======
 
+import { header } from 'express-validator';
 import getRoomById from '../../server/functions/getRoomById';
 import './chat.css';
 import { io } from 'socket.io-client';
@@ -18,10 +19,32 @@ const username = getUsername();
 // ====== FUNCTIONS ======
 
 async function main() {
+    updateCSSVars();
     populateMessages();
     addEventListeners();
 
     setupSockets();
+}
+
+function updateCSSVars () {
+
+    const root = document.querySelector(':root');
+    root.style.setProperty('--screenHeight', `${window.innerHeight}px`);
+    root.style.setProperty('--screenWidth', `${window.innerWidth}px`);
+
+    const headerHeight = document.querySelector('header').getBoundingClientRect().height;
+
+    // Set main height to prevent overflow
+    const main = document.querySelector('main');
+    main.style.height = `${+window.innerHeight - +headerHeight - 1}px`;
+
+    const mainHeight = main.getBoundingClientRect().height;
+    const chatNameWrapperHeight = document.querySelector('.chatNameWrapper').getBoundingClientRect().height;
+    const inviteBtnsWrapperHeight = document.querySelector('.inviteBtnsWrapper').getBoundingClientRect().height;
+    const newMessageFormHeight = document.querySelector('.newMessageForm').getBoundingClientRect().height;
+
+    const messagesSection = document.querySelector('.messages');
+    messagesSection.style.maxHeight = `${mainHeight - chatNameWrapperHeight - inviteBtnsWrapperHeight - newMessageFormHeight - 16 - 8}px`;
 }
 
 function setupSockets () {
@@ -38,9 +61,6 @@ function handleMessagePosted (status) {
 }
 
 async function addMessage (messageObj) {
-    
-    console.log('Adding message:');
-    console.log(messageObj);
 
     // User
     const messageSender = document.createElement('h3');
@@ -51,7 +71,6 @@ async function addMessage (messageObj) {
     const gptPrompt = document.createElement('p');
     gptPrompt.classList.add('prompt');
     if (messageObj.prompt) {
-        console.log('PROMPT FOUND');
         gptPrompt.innerText = messageObj.prompt;
     }
 
@@ -128,6 +147,15 @@ function addEventListeners () {
     addInviteBtnListener();
     addInviteCloseBtnListener();
     addSubmitInviteBtnListener();
+    addWindowResizeListener();
+}
+
+function addWindowResizeListener () {
+    window.addEventListener('resize', windowResizeHandler);
+}
+
+function windowResizeHandler () {
+    updateCSSVars();
 }
 
 function addSendGPTBtnListener () {
