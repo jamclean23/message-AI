@@ -21,7 +21,7 @@ const messageSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
-        default: Date.now()
+        required: true
     },
     isGpt: {
         type: Boolean,

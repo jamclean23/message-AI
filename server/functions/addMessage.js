@@ -39,6 +39,7 @@ async function addMessage (roomId, userId, msg, username, isGpt = false, prompt=
             user: userId,
             content: msg,
             username,
+            date: Date.now(),
             isGpt,
             prompt
         });

@@ -1,5 +1,5 @@
 Feedback for register/login errors
-Logout button
+Rename chat
 Leave chat button
 Invites popup in real time
 message chatbox enter submits, shift+enter new line
