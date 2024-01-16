@@ -12,6 +12,11 @@ const Room = (__webpack_require__(225).model);
 
 // ====== FUNCTIONS ======
 
+/**
+ * 
+ * @param {String} id - Id of room entry 
+ * @returns Room object || null
+ */
 async function getRoomById(id) {
   if (id) {
     try {
@@ -58,7 +63,7 @@ const messageSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.now()
+    required: true
   },
   isGpt: {
     type: Boolean,

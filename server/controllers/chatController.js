@@ -11,7 +11,10 @@ const addInviteToUserByName = require('../functions/addInviteToUserByName.js');
 // ====== FUNCTIONS ======
 
 async function chatPage (req, res) {
-    res.render('chat', {roomId: req.params.roomId, userId: req.user.id, username: req.user.username});
+    const room = await getRoomById(req.params.roomId);
+    console.log('ROOM OBJECT');
+    console.log(room);
+    res.render('chat', { chatName: room.name, roomId: req.params.roomId, userId: req.user.id, username: req.user.username});
 }
 
 async function startChat (req, res) {

@@ -5,4 +5,4 @@ Invites popup in real time
 message chatbox enter submits, shift+enter new line
 messages do not overflow screen
 User can remove own messages
-Fix dates not being assigned correctly
+Display chat name

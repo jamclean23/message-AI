@@ -8,6 +8,11 @@ const Room = require('../models/room.js').model;
 
 // ====== FUNCTIONS ======
 
+/**
+ * 
+ * @param {String} id - Id of room entry 
+ * @returns Room object || null
+ */
 async function getRoomById (id) {
     if (id) {
         try {
